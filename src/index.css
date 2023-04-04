@@ -8,12 +8,12 @@
 
   /* color-scheme: light dark; */
  
-/* 
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%; */
+  -webkit-text-size-adjust: 100%;
 }
 
 
@@ -48,4 +48,9 @@ i
   background: transparent;
 }
 
+button{
+  cursor: pointer;
+}
 
+
+/* color: #0a66c2 */

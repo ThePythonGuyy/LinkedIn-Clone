@@ -3,110 +3,124 @@ import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 const Header = () => {
   return (
+    <div>
+      <HeaderC >
 
-    <HeaderC >
+        <Content >
+          <Logo>
+            <a href="/home">
+              <img src="/images/home-logo.svg" alt="" />
+            </a>
+          </Logo>
+          <Search>
+            <div >
+              <input type="text" placeholder='Search' />
+            </div>
 
-      <Content >
-        <Logo>
-          <a href="/home">
-            <img src="/images/home-logo.svg" alt="" />
-          </a>
-        </Logo>
-        <Search>
-          <div >
-            <input type="text" placeholder='Search' />
-          </div>
-
-          <SearchIcon>
-            <img src="/images/search-icon.svg" alt="" />
-          </SearchIcon>
-        </Search>
-        <Nav>
-          <NavListWrap>
-            <NavList className='active'>
-              <a>
-                <img src="/images/nav-home.svg" alt="" />
-                <span>
-                  Home
-                </span>
-              </a>
-            </NavList>
-
-            <NavList>
-              <a>
-                <img src="/images/nav-network.svg" alt="" />
-                <span>
-                  Network
-                </span>
-              </a>
-            </NavList>
-
-            <NavList>
-              <a>
-                <img src="/images/nav-jobs.svg" alt="" />
-                <span>
-                  Jobs
-                </span>
-              </a>
-            </NavList>
-
-            <NavList>
-              <a>
-                <img src="/images/nav-messaging.svg" alt="" />
-                <span>
-                  Messaging
-                </span>
-              </a>
-            </NavList>
-
-            <NavList>
-              <a>
-                <img src="/images/nav-notifications.svg" alt="" />
-                <span>
-                  Notification
-                </span>
-              </a>
-            </NavList>
-
-            <User>
-                <a >
-                    <img src="/images/user.svg" alt="" />
-                    <span>
-                      me
-                    <img src="/images/down-icon.svg" alt="" />
-                    </span>
+            <SearchIcon>
+              <img src="/images/search-icon.svg" alt="" />
+            </SearchIcon>
+          </Search>
+          <Nav>
+            <NavListWrap>
+              <NavList className='active'>
+                <a>
+                  <img src="/images/nav-home.svg" alt="" />
+                  <span>
+                    Home
+                  </span>
                 </a>
-            </User>
+              </NavList>
 
-            <Work>
-              <a>
-                <img src="/images/nav-work.svg" alt="" />
-                <span>
+              <NavList>
+                <a>
+                  <img src="/images/nav-network.svg" alt="" />
+                  <span>
+                    Network
+                  </span>
+                </a>
+              </NavList>
+
+              <NavList>
+                <a>
+                  <img src="/images/nav-jobs.svg" alt="" />
+                  <span>
+                    Jobs
+                  </span>
+                </a>
+              </NavList>
+
+              <NavList>
+                <a>
+                  <img src="/images/nav-messaging.svg" alt="" />
+                  <span>
+                    Messaging
+                  </span>
+                </a>
+              </NavList>
+
+              <NavList>
+                <a>
+                  <img src="/images/nav-notifications.svg" alt="" />
+                  <span>
+                    Notification
+                  </span>
+                </a>
+              </NavList>
+
+              <User>
+                <a >
+                  <img src="/images/user.svg" alt="" />
+                  <span>
+                    me
+                    <img src="/images/down-icon.svg" alt="" />
+                  </span>
+                </a>
+
+                <SignOut>
+                  SignOut
+                </SignOut>
+              </User>
+
+              <Work>
+                <a>
+                  <img src="/images/nav-work.svg" alt="" />
+
+
+                  <span>
                     Work
                     <img src="/images/down-icon.svg" alt="" />
-                </span>
-              </a>
-            </Work>
-          </NavListWrap>
-        </Nav>
-      </Content>
-      <div>
+                  </span>
+                </a>
+              </Work>
+            </NavListWrap>
+          </Nav>
+        </Content>
+
+      </HeaderC>
+      <div style={{paddingTop: '62px'}}>
         <Outlet />
       </div>
-    </HeaderC>
+    </div>
   )
 }
 
 export default Header;
 
 const HeaderC = styled.div`
-    width: 96vw;
-    background-color : #ffffff;
-    /* border-bottom: 1px solid rgba(0, 0, 0, 1); */
+    width: 100vw;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
     position: fixed;
-    left: 0;
-    padding: 0 2vw;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    /* left: 0; */
+    /* padding: 0 2vw; */
     z-index: 5;
+
+    //testing
+    /* background-color: yellow; */
   
 
 `;
@@ -114,9 +128,11 @@ const HeaderC = styled.div`
 
 const Content = styled.div`
     display: flex;
-    width: 100%;
+    width: 99%;
+    max-width: 99%;
     align-items: center;
     margin: 0 auto;
+    padding: 0 5vw;
     padding-top: 0.8vh;
     //testing
     /* background-color: pink; */
@@ -134,7 +150,11 @@ const Logo = styled.span`
 
 const Search = styled.div`
     opacity: 1;
+    display: flex;
+    align-items: center;
+    height: 100%;
     flex-grow: 1;
+    /* height: 100%; */
     position: relative;
     & > div{
 
@@ -152,7 +172,7 @@ const Search = styled.div`
         line-height: 1.75;
         font-weight: 400;
         font-size: 13px;
-        height: 33px;
+        height: 36px;
         border-color: #94bbe4;
         vertical-align: text-top;
       }
@@ -163,12 +183,14 @@ const Search = styled.div`
           opacity: 1;
       }
     }
+    /* testing */
+    /* background-color: brown; */
 `;
 
 
 const SearchIcon = styled.div`
     position: absolute;
-    top: 7.2px;
+    top: 18.2px;
     left: 0.5vw;
     z-index: 1;
     pointer-events: none;
@@ -197,6 +219,9 @@ const Nav = styled.div`
       bottom: 0;
       width: 100%;
      }
+
+     //testing
+     /* background-color: red; */
 `;
 
 const NavListWrap = styled.ul`
@@ -273,6 +298,19 @@ const NavList = styled.li`
     @media all and (max-width: 1024px) and (max-height: 768px) and (orientation: landscape) { }
 `;
 
+const SignOut = styled.div`
+    display: none;
+    position: absolute;
+    top: 62px;
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    transition-duration: 3s;
+    
+    //testing
+    background-color: yellow;
+
+`;
 
 const User = styled(NavList)`
     
@@ -290,6 +328,15 @@ const User = styled(NavList)`
     a{
        align-items: center;
        justify-content: center;
+    }
+
+    &:hover {
+        ${SignOut} {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
     }
 
     @media all and (max-width: 768px) and (max-height: 1024px) and (orientation: portrait) { 
