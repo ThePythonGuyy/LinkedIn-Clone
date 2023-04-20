@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 //inbuilt fun()
-
+import { connect } from 'react-redux'
 //components
 
 const Left = (props) => {
@@ -16,7 +16,12 @@ const Left = (props) => {
                         <Photo />
                         </div>
                             <Link>
-                                Welcome, there!
+                                Welcome, { props.user && props.user.displayName ? (
+                                    <span>{props.user.displayName}!</span>
+                                ) : (
+                                    <span>There!</span>
+                                )
+                                }
                             </Link>
                     </a>
                     <a >
@@ -256,4 +261,16 @@ const CommunityCard = styled(ArtCard)`
 
 
 
-export default Left
+// export default Left
+
+const mapStateToProps = (state) => {
+    return{
+        user: state.userState.user,
+    };
+};
+
+// const mapDispatchToProps = (dispatch) => ({
+//     // signOut: () => dispatch(signOutAPI()),
+// });
+
+export default connect(mapStateToProps)(Left)

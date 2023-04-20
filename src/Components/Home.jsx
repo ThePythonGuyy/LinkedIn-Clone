@@ -1,14 +1,21 @@
+// INbuilt func()
 import React from 'react'
 import styled from 'styled-components'
-
+import { connect } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 //components
 import Left from './Left'
 import Main from './Main'
 import Right from './Right'
 
-const Home = () => {
+const Home = (props) => {
   return (
         <HomeC>
+          { !props.user &&
+          
+              <Navigate to='/' />
+
+          }
             <Section>
 
                 <h5>
@@ -31,7 +38,7 @@ const Home = () => {
   )
 }
 
-export default Home
+
 
 const HomeC = styled.div`
     width: 100%;  
@@ -102,3 +109,15 @@ const Layout = styled.div`
     /* border: 2px solid black; */
     /* margin-left: 8px; */
 `;
+
+const mapStateToProps = (state) => {
+  return{
+      user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  //signOut: () => dispatch(signOutAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

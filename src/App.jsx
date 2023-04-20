@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+//Inbuilt func()
+import { connect } from 'react-redux'
+import { useEffect } from 'react'
 
+// user func()
+import { getUserAuth } from './actions'
 //Layouts
 import RootLayout from './Layouts/RootLayout'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
@@ -22,9 +23,12 @@ const router = createBrowserRouter (
         </Route>
     )
 )
-function App() {
+function App(props) {
  
+  useEffect(() => {
+    props.getUserAuth();
 
+  }, []);
   return (
     <div className="App">
      <RouterProvider  router={router}/>
@@ -33,4 +37,12 @@ function App() {
   )
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return{};
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  getUserAuth: () => dispatch(getUserAuth()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

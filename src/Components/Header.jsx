@@ -1,7 +1,17 @@
+//Inbuilt func()
 import React from 'react'
-import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-const Header = () => {
+import { connect } from 'react-redux'
+
+//User func()
+import { signOutAPI } from '../actions'
+
+//components
+import { Outlet } from 'react-router-dom'
+
+
+
+const Header = (props) => {
   return (
     <div>
       <HeaderC >
@@ -70,14 +80,20 @@ const Header = () => {
 
               <User>
                 <a >
-                  <img src="/images/user.svg" alt="" />
+                  {props.user && props.user.photoURL ? (
+                    <img src={props.user.photoURL} alt='' />
+                  ) : (
+                    <img src="/images/user.svg" alt="" />
+                  )
+                  }
+                  
                   <span>
                     me
                     <img src="/images/down-icon.svg" alt="" />
                   </span>
                 </a>
 
-                <SignOut>
+                <SignOut onClick={() => props.signOut()}>
                   SignOut
                 </SignOut>
               </User>
@@ -105,7 +121,7 @@ const Header = () => {
   )
 }
 
-export default Header;
+// export default Header;
 
 const HeaderC = styled.div`
     width: 100vw;
@@ -302,13 +318,18 @@ const SignOut = styled.div`
     display: none;
     position: absolute;
     top: 62px;
+    right: 12vw;
     width: 100px;
     height: 40px;
     font-size: 15px;
     transition-duration: 3s;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);;
     
     //testing
-    background-color: yellow;
+    /* background-color: yellow; */
 
 `;
 
@@ -361,4 +382,14 @@ const Work = styled(User)`
     @media all and (max-width: 1024px) and (max-height: 768px) and (orientation: landscape) { } 
 `;
 
+const mapStateToProps = (state) => {
+    return{
+        user: state.userState.user,
+    };
+};
 
+const mapDispatchToProps = (dispatch) => ({
+    signOut: () => dispatch(signOutAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
