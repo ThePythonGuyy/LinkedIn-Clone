@@ -1,18 +1,39 @@
+//inbuilt fun()
 import React from "react";
 import styled from "styled-components";
-
-//inbuilt fun()
+import { useState } from "react";
 
 //components
+import PostModel from "./PostModel";
 
-const Main = () => {
+const Main = (props) => {
+  const [showModel, setShowModel] = useState('close');
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (e.target !== e.currentTarget){
+      return;
+    }
+
+    switch (showModel) {
+      case 'open' :
+        setShowModel('close');
+        break;
+      case 'close':
+        setShowModel('open');
+        break;
+      default :
+        setShowModel('close');
+        break;
+    }
+  }
+
   return (
     <MainC>
       <ShareBox>
-        Share
+        
         <div>
           <img src="/images/user.svg" alt="" />
-          <button>Start a post</button>
+          <button onClick={handleClick}>Start a post</button>
         </div>
         <div>
           <button>
@@ -89,6 +110,7 @@ const Main = () => {
           </SocialActions>
         </Article>
       </div>
+      <PostModel showModel={showModel} handleClick={handleClick} />
     </MainC>
   );
 };
@@ -137,6 +159,7 @@ const ShareBox = styled(CommonCard)`
 
     &:first-child {
       display: flex;
+      flex-wrap: nowrap;
       align-items: center;
       padding: 8px 16px 0px 16px;
 
@@ -150,6 +173,7 @@ const ShareBox = styled(CommonCard)`
       button {
         margin: 4px 0;
         flex-grow: 1;
+        margin-right: 40px;
         padding-left: 16px;
         border: 1px solid rgba(0, 0, 0, 0.15);
         border-radius: 35px;
@@ -163,7 +187,7 @@ const ShareBox = styled(CommonCard)`
     &:nth-child(2) {
       display: flex;
       justify-content: space-around;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
   }
 `;
