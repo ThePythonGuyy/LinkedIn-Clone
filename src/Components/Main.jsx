@@ -2,37 +2,40 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-
+import { connect } from "react-redux";
 //components
 import PostModel from "./PostModel";
 
 const Main = (props) => {
-  const [showModel, setShowModel] = useState('close');
+  const [showModel, setShowModel] = useState("close");
   const handleClick = (e) => {
     e.preventDefault();
-    if (e.target !== e.currentTarget){
+    if (e.target !== e.currentTarget) {
       return;
     }
 
     switch (showModel) {
-      case 'open' :
-        setShowModel('close');
+      case "open":
+        setShowModel("close");
         break;
-      case 'close':
-        setShowModel('open');
+      case "close":
+        setShowModel("open");
         break;
-      default :
-        setShowModel('close');
+      default:
+        setShowModel("close");
         break;
     }
-  }
+  };
 
   return (
     <MainC>
       <ShareBox>
-        
         <div>
-          <img src="/images/user.svg" alt="" />
+          {props.user && props.user.photoURL ? (
+            <img src={props.user.photoURL} />
+          ) : (
+            <img src="/images/user.svg" alt="" />
+          )}
           <button onClick={handleClick}>Start a post</button>
         </div>
         <div>
@@ -300,24 +303,30 @@ const SocialCounts = styled.ul`
 `;
 
 const SocialActions = styled.div`
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0;
+  min-height: 40px;
+  padding: 4px 8px;
+  button {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-around;
-    margin: 0;
-    min-height: 40px;
-    padding: 4px 8px;
-    button{
-      display: inline-flex;
-      align-items: center;
-      padding: 8px;
-      gap: 5px;
-      font-weight: 500;
-      outline: none;
-      background: transparent;
-      border: none;
-      /* color: #0a66c2; */
-    }
+    padding: 8px;
+    gap: 5px;
+    font-weight: 500;
+    outline: none;
+    background: transparent;
+    border: none;
+    /* color: #0a66c2; */
+  }
 `;
 
-export default Main;
+const mapStateToProps = (state) => ({
+  user: state.userState.user,
+});
+
+const mapDispatchToProps = (dipatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
