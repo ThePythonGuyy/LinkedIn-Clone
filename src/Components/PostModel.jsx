@@ -52,12 +52,17 @@ const PostModel = (props) => {
             </Header>
             <SharedCont>
               <UserInfo>
-                { props.user && props.user.photoURL ? ( 
-                  <img src={props.user.photoURL} />
+                {props.user && props.user.photoURL ? (
+                  <>
+                    <img src={props.user.photoURL} />
+                    <span>{props.user.displayName}</span>
+                  </>
                 ) : (
-                  <img src="/images/user.svg" alt="" />
+                  <>
+                    <img src="/images/user.svg" alt="" />
+                    <span>Name</span>
+                  </>
                 )}
-                <span>Name</span>
               </UserInfo>
               <Editor>
                 <textarea
@@ -293,8 +298,8 @@ const UploadImg = styled.div`
 const mapStateToProps = (state) => {
   return {
     user: state.userState.user,
-  }
-}
+  };
+};
 
 const mapDipatchToProps = (dispatch) => ({});
 
